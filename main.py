@@ -28,8 +28,6 @@ elif activity_status == "dnd":
 else:
     activity_status = discord.Status.online
 
-embed_color = discord.Color(0xff56c5)
-
 loop = asyncio.get_event_loop()
 
 
@@ -150,7 +148,7 @@ async def on_message(message):
                     f"My prefix is `{await get_prefix(client, message)}`! \n"
                     f"Type `{await get_prefix(client, message)}help` for more commands!"
                 ),
-                color=embed_color
+                color=discord.Color.green()
             )
             msg = await channel.send(embed=embed)
             await asyncio.sleep(5)
