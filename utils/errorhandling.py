@@ -23,10 +23,30 @@ class ErrorHandling(commands.Cog):
         if isinstance(error, commands.CommandNotFound):
             return
         elif isinstance(error, commands.CheckFailure):
-            if isinstance(error, NotDM):
-                print('custom error check done')
+            if isinstance(error, commands.NSFWChannelRequired):
+                embed = discord.Embed(
+                    title='You are horny!',
+                    description='This command can only be used in NSFW Channels!',
+                    color=discord.Color.red(),
+                    timestamp=datetime.datetime.utcnow()
+                )
+                await ctx.send(embed=embed)
+            elif isinstance(error, NotDM):
+                embed = discord.Embed(
+                    title='Don\'t be publicly about this!',
+                    description='This command can not be used in a Server!',
+                    color=discord.Color.red(),
+                    timestamp=datetime.datetime.utcnow()
+                )
+                await ctx.send(embed=embed)
             elif isinstance(error, NotGuild):
-                print('custom error check done')
+                embed = discord.Embed(
+                    title='Don\'t be sneaky!',
+                    description='This command can not be used in Direct Messages!',
+                    color=discord.Color.red(),
+                    timestamp=datetime.datetime.utcnow()
+                )
+                await ctx.send(embed=embed)
             elif isinstance(error, NotBotOwner):
                 embed = discord.Embed(
                     title='OwO, what\'s this???',
@@ -38,9 +58,21 @@ class ErrorHandling(commands.Cog):
                 )
                 await ctx.send(embed=embed)
             elif isinstance(error, NotGuildOwner):
-                print('custom error check done')
+                embed = discord.Embed(
+                    title='Oi mate!',
+                    description='This command can only be used by the Server Owner!',
+                    color=discord.Color.red(),
+                    timestamp=datetime.datetime.utcnow()
+                )
+                await ctx.send(embed=embed)
             elif isinstance(error, NotGuildAdmin):
-                print('custom error check done')
+                embed = discord.Embed(
+                    title='Oi mate!',
+                    description='This command can only be used by Server Admins!',
+                    color=discord.Color.red(),
+                    timestamp=datetime.datetime.utcnow()
+                )
+                await ctx.send(embed=embed)
 
         elif isinstance(error, commands.CommandOnCooldown):
             cooldown = cooldown_formatter(error.retry_after)
