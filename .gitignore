@@ -1,0 +1,5 @@
+config.json
+cogs/owner.py
+.idea
+venv
+__pycache__
