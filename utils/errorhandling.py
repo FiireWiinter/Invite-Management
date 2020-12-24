@@ -1,11 +1,15 @@
 import traceback
 import datetime
+import json
 
 import discord
 from discord.ext import commands
 
 from utils.formatters import cooldown_formatter, help_formatter, error_formatter
 from utils.exceptions import *
+
+with open('config.json') as f:
+    error_channel = json.load(f)['error_log_channel']
 
 
 class ErrorHandling(commands.Cog):
@@ -95,11 +99,25 @@ class ErrorHandling(commands.Cog):
                 await ctx.send(embed=error_formatter(ctx, error, False))
 
         else:
-            await ctx.send(embed=error_formatter(ctx, f'{type(error).__name__}: {error}'))
+            await ctx.send(embed=error_formatter(ctx, f'{type(error).__name__}: {error}', True))
+            ctx.bot.log.error(f'Occurred in {ctx.guild}, in {ctx.channel} by user {ctx.author}')
+            ctx.bot.log.error(f'Ignoring exception in command {ctx.command}:')
             error = traceback.format_exception(type(error), error, error.__traceback__)
-            ctx.bot.log.ERROR(f'Occurred in {ctx.guild}, in {ctx.channel} by user {ctx.author}\n{"-" * 15}')
-            ctx.bot.log.ERROR(f'Ignoring exception in command {ctx.command}:')
-            ctx.bot.log.ERROR(error)
+            error2 = ''.join(error)
+            print(error2)
+            channel = ctx.bot.get_channel(error_channel)
+            embed = discord.Embed(
+                title='>w< That\'s not good',
+                color=discord.Color.red(),
+                timestamp=datetime.datetime.utcnow()
+            )
+            embed.add_field(name='Guild', value=ctx.guild)
+            embed.add_field(name='Channel', value=ctx.channel)
+            embed.add_field(name='Author', value=ctx.author)
+            await channel.send(
+                f'```py\n{"".join(error2)[:1990 if len(error2) > 1990 else len(error2)]}\n```',
+                embed=embed
+            )
 
 
 def setup(bot):

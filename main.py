@@ -52,7 +52,7 @@ class Bot(commands.AutoShardedBot):
         self.start_time = kwargs.pop("start_time")
         self.pool = kwargs.pop("pool")
         logging.basicConfig(
-            format=f'%(asctime)s - %(levelname)s - %(filename)s - %(message)s',
+            format=f'%(asctime)s - %(filename)s - %(message)s',
             datefmt='%d-%b-%y %H:%M:%S'
         )
         self.log = logging.getLogger("bot")
