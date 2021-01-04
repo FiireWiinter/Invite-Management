@@ -124,7 +124,7 @@ def error_formatter(ctx, error, notify=True):
     )
     embed.add_field(
         name='Error in command',
-        value=f'> ```py\n> {error}\n> ```'
+        value=f'```py\n{error}\n```'
     )
 
     return embed
