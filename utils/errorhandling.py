@@ -27,17 +27,18 @@ class ErrorHandling(commands.Cog):
         if isinstance(error, commands.CommandNotFound):
             return
 
-        elif isinstance(error, discord.Forbidden):
+        if type(error).__name__ == 'Forbidden':
             text = 'Uh oh, it seems that i am missing one or more permissions to correctly work!\n' \
                    'Please make sure, that i have all the following permissions!\n' \
                    'View Channels, Manage Roles, Manage Server, Send Messages, Embed Links'
             try:
-                await ctx.send(text)
+                return await ctx.send(text)
             except discord.Forbidden:
                 try:
-                    await ctx.author.send(text)
+                    return await ctx.author.send(text)
                 except discord.Forbidden:
-                    pass
+                    return
+
 
         elif isinstance(error, commands.CheckFailure):
             if isinstance(error, commands.NSFWChannelRequired):
