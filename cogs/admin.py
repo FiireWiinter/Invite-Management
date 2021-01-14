@@ -7,7 +7,7 @@ from discord.ext import commands
 from utils.predicates import *
 
 
-class Setup(commands.Cog):
+class Admin(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
@@ -103,4 +103,4 @@ class Setup(commands.Cog):
 
 
 def setup(bot):
-    bot.add_cog(Setup(bot))
+    bot.add_cog(Admin(bot))

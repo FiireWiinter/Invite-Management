@@ -1,12 +1,11 @@
 from json import dumps
+from asyncio import sleep
 
 import discord
 from discord.ext import commands
 
-from utils.predicates import guild_only
 
-
-class Invite(commands.Cog):
+class System(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
@@ -30,6 +29,7 @@ class Invite(commands.Cog):
 
     @commands.Cog.listener()
     async def on_guild_join(self, guild):
+        await sleep(5)
         async with self.bot.pool.acquire() as db:
             inv_db = {}
             for invite in await guild.invites():
@@ -43,17 +43,6 @@ class Invite(commands.Cog):
                 dumps(inv_db), guild.id
             )
 
-    @commands.command()
-    @guild_only()
-    async def invites(self, ctx, member: discord.Member = None):
-        if not member:
-            member = ctx.author
-        async with self.bot.pool.acquire() as db:
-            user = await db.fetchval(
-                'SELECT users FROM guilds WHERE ID=$1', member.id
-            )
-            print(user)
-
 
 def setup(bot):
-    bot.add_cog(Invite(bot))
+    bot.add_cog(System(bot))
