@@ -67,8 +67,14 @@ class Admin(commands.Cog):
     @commands.command()
     @guild_only()
     @guild_admin()
-    async def create_invite(self, ctx, roles: commands.Greedy[discord.Role]):
-        await ctx.send('lol no')
+    async def clear_user(self, ctx, user: discord.member):
+        pass
+
+    @commands.command()
+    @guild_only()
+    @guild_owner()
+    async def clear_all(self, ctx):
+        pass
 
     @commands.command()
     @guild_only()
