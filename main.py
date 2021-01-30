@@ -42,12 +42,19 @@ async def get_prefix(_client, message):
             )
     return prefix
 
+intents = discord.Intents.none()
+intents.guilds = True
+intents.members = True
+intents.invites = True
+intents.messages = True
+intents.guild_reactions = True
+
 
 class Bot(commands.AutoShardedBot):
     def __init__(self, **kwargs):
         super().__init__(
             command_prefix=get_prefix,
-            intents=discord.Intents.all()
+            intents=intents
         )
         self.start_time = kwargs.pop("start_time")
         self.pool = kwargs.pop("pool")
