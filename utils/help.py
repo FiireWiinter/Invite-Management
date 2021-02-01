@@ -66,9 +66,9 @@ class Help(commands.Cog):
 
             embed.add_field(
                 name="Links",
-                value="[Invite me with required Permissions)](https://discord.com/oauth2/authorize?client_id="
-                      "802514124415172618&permissions=268520544&scope=bot) [Invite me with Admin Permissions)]("
-                      "https://discord.com/api/oauth2/authorize?client_id=802514124415172618&permissions=8&scope=bot)"
+                value="[Invite me with required Permissions](https://discord.com/oauth2/authorize?client_id="
+                      "802514124415172618&permissions=268520544&scope=bot)\n[Invite me with Admin Permissions]("
+                      "https://discord.com/api/oauth2/authorize?client_id=802514124415172618&permissions=8&scope=bot)\n"
                       "[GitHub Repo](https://github.com/FiireWiinter/Invite-Management)",
                 inline=False
             )

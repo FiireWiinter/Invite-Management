@@ -156,6 +156,30 @@ class System(commands.Cog):
         if before.pending and not after.pending:
             await self.give_user_roles(after)
 
+    async def roles_no_perms(self, member, inviter):
+        async with self.bot.pool.acquire() as db:
+            logs = await db.fetchval(
+                'SELECT logs FROM guilds WHERE id=$1',
+                member.guild.id
+            )
+            channel = discord.utils.get(member.guild.channels, id=logs)
+            if not channel:
+                return
+            inviter = self.bot.get_user(inviter)
+            if not inviter:
+                inviter = await self.bot.fetch_user(inviter)
+            embed = discord.Embed(
+                title='Uh oh',
+                description=f'{member} has joined the server, who is invited by {inviter}.\n'
+                            f'The issue: I was unable to give {member} one or more roles!\n'
+                            f'Please make sure that i am high enough in the Role Hierarchy,\n'
+                            f'since i can only give members the roles, if the member and\n'
+                            f'role is under me.',
+                timestamp=datetime.datetime.utcnow(),
+                color=discord.Color.red()
+            )
+            return await channel.send(embed=embed)
+
     async def give_user_roles(self, member, roles=None, inviter=None):
         async with self.bot.pool.acquire() as db:
             if not roles:
@@ -175,7 +199,10 @@ class System(commands.Cog):
             for role in roles:
                 role = discord.utils.get(member.guild.roles, id=role)
                 if role:
-                    await member.add_roles(role)
+                    try:
+                        await member.add_roles(role)
+                    except discord.Forbidden:
+                        return await self.roles_no_perms(member, inviter)
                     all_roles.append(role.mention)
 
             logs = await db.fetchval(
@@ -186,6 +213,9 @@ class System(commands.Cog):
             if not channel:
                 return
 
+            inviter = self.bot.get_user(inviter)
+            if not inviter:
+                inviter = await self.bot.fetch_user(inviter)
             embed = discord.Embed(
                 title=f'Welcome {member}!',
                 description=f'Invited by: {self.bot.get_user(inviter)}\n'

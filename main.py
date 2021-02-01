@@ -101,8 +101,8 @@ class Bot(commands.AutoShardedBot):
                         )
                     else:
                         await db.execute(
-                            f"INSERT INTO guilds (ID, prefix) VALUES ($1, $2)",
-                            guild, "im!",
+                            f"INSERT INTO guilds (ID, prefix, codes, invites) VALUES ($1, $2, $3, $3)",
+                            guild.id, "im!", json.dumps({}),
                         )
 
     async def on_ready(self):
@@ -168,8 +168,8 @@ async def on_message(message):
 async def on_guild_join(guild):
     async with client.pool.acquire() as db:
         await db.execute(
-            f"INSERT INTO guilds (ID, prefix) VALUES ($1, $2)",
-            guild.id, "im!"
+            f"INSERT INTO guilds (ID, prefix, codes, invites) VALUES ($1, $2, $3, $3)",
+            guild.id, "im!", json.dumps({}),
         )
 
 
