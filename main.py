@@ -13,7 +13,7 @@ from utils import predicates, utils
 
 with open("config.json") as f:
     cfg = json.load(f)
-token = cfg["dev_token"]
+token = cfg["token"]
 owners = cfg["owners"]
 db_login = cfg["db"]
 
@@ -151,10 +151,8 @@ async def on_message(message):
     try:
         if message.mentions[0] == client.user:
             embed = discord.Embed(
-                title=(
-                    f"My prefix is `{await get_prefix(client, message)}`! \n"
-                    f"Type `{await get_prefix(client, message)}help` for more commands!"
-                ),
+                title="My prefix is `{await get_prefix(client, message)}`! \n"
+                      f"Type `{await get_prefix(client, message)}help` for more commands!",
                 color=discord.Color.green()
             )
             msg = await channel.send(embed=embed)

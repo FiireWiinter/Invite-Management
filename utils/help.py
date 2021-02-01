@@ -6,7 +6,6 @@ from discord.ext import commands
 
 from utils.prefix import prefix
 import utils.formatters as formatters
-from utils.predicates import dm_only
 
 with open('config.json') as f:
     data = json.load(f)
@@ -65,15 +64,14 @@ class Help(commands.Cog):
                         inline=False
                     )
 
-            '''
             embed.add_field(
-                name="Useful links:",
-                value="[Invite me](https://discord.com/oauth2/authorize?client_id=729040070400802917&permissions="
-                      "2147483647&scope=bot), [Support Server](https://discord.gg/Qe8JA9J), "
-                      "[Our Community](https://discord.gg/anthro)",
+                name="Links",
+                value="[Invite me with required Permissions)](https://discord.com/oauth2/authorize?client_id="
+                      "802514124415172618&permissions=268520544&scope=bot) [Invite me with Admin Permissions)]("
+                      "https://discord.com/api/oauth2/authorize?client_id=802514124415172618&permissions=8&scope=bot)"
+                      "[GitHub Repo](https://github.com/FiireWiinter/Invite-Management)",
                 inline=False
             )
-            '''
 
             try:
                 await ctx.send(embed=embed)

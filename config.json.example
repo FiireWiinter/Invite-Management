@@ -1,0 +1,23 @@
+{
+  "token": "",
+  "dev_token": "",
+  "owners": [
+    000000000000000000,
+    000000000000000000
+  ],
+  "error_log_channel": 000000000000000000,
+  "version": "1.0",
+  "activity": {
+    "message": "with invites",
+    "status": "online"
+  },
+  "top.gg": "",
+  "statcord": "",
+  "db": {
+    "host": "localhost",
+    "port": 5432,
+    "user": "",
+    "password": "",
+    "database": "invite_management"
+  }
+}

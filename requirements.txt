@@ -2,3 +2,5 @@ asyncpg
 discord
 DateTime
 asyncio
+statcord.py
+dblpy

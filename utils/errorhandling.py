@@ -39,7 +39,6 @@ class ErrorHandling(commands.Cog):
                 except discord.Forbidden:
                     return
 
-
         elif isinstance(error, commands.CheckFailure):
             if isinstance(error, commands.NSFWChannelRequired):
                 embed = discord.Embed(
