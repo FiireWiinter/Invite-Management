@@ -157,6 +157,9 @@ class Admin(commands.Cog):
         except TimeoutError:
             return await ctx.send('Timeout of 60 seconds reached!')
 
+        if _reaction == '❌':
+            return await ctx.send('Alright! I am not showing them.')
+
         async with ctx.bot.pool.acquire() as db:
             codes = await db.fetchval(
                 'SELECT codes FROM guilds WHERE id=$1',

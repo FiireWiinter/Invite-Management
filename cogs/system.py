@@ -43,6 +43,21 @@ class System(commands.Cog):
                     dumps(codes), guild.id
                 )
 
+            pending = await db.fetch('SELECT * FROM pending')
+            for row in pending:
+                user, guild = row[0].split('_')
+                guild = self.bot.get_guild(int(guild))
+                if guild:
+                    user = guild.get_member(int(user))
+                    if user:
+                        if not user.pending:
+                            await self.give_user_roles(user, row[1], row[2])
+                            continue
+                await db.execute(
+                    'DELETE FROM pending WHERE user_guild=$1',
+                    row[0]
+                )
+
     @commands.Cog.listener()
     async def on_guild_join(self, guild):
         await sleep(5)

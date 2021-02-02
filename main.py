@@ -13,7 +13,10 @@ from utils import predicates, utils
 
 with open("config.json") as f:
     cfg = json.load(f)
-token = cfg["token"]
+if cfg["dev_mode"]:
+    token = cfg["dev_token"]
+else:
+    token = cfg["token"]
 owners = cfg["owners"]
 db_login = cfg["db"]
 
