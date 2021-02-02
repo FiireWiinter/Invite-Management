@@ -191,6 +191,15 @@ class Admin(commands.Cog):
                     f'{f" | Roles not found: {not_found}" if not_found else ""}\n'
                 )
 
+        if len(all_codes) == 0:
+            embed = discord.Embed(
+                title='All Codes',
+                description='There are no codes saved',
+                timestamp=datetime.datetime.utcnow(),
+                color=discord.Color.green()
+            )
+            return await ctx.send(embed=embed)
+
         temp_msg = ""
         for code in all_codes:
             if len(temp_msg) + len(code) >= 2048:
