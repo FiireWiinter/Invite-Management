@@ -9,7 +9,7 @@ With Invite Management, you can create special invite links, to auto-assign role
 - im!codes
 	- List all the special invite codes
 - im!set_log (channel)
-	- Set a join channel
+	- Set a join log channel
 - im!prefix (prefix)
 	- Change the server prefix
 ## Invite it into your server
