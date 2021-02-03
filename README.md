@@ -15,6 +15,7 @@ With Invite Management, you can create special invite links, to auto-assign role
 ## Invite it into your server
 
 To invite the bot into your own server with all the minimum permissions, [press here](https://discord.com/oauth2/authorize?client_id=802514124415172618&permissions=268520544&scope=bot).
+
 To invite the bot into your own server with admin permissions, [press here](https://discord.com/api/oauth2/authorize?client_id=802514124415172618&permissions=8&scope=bot).
 
 ## Setting it up on your server
