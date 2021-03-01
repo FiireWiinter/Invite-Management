@@ -32,7 +32,7 @@ To invite the bot into your own server with admin permissions, [press here](http
 		- Member who invited that person
 		- The roles applied to that person, if roles are assigned to his  invite
 - You are done setting the bot up
-- If you want to remove a command, run the command im!del_invite (code)
+- If you want to remove a invite, run the command im!del_invite (code)
 
 ## Hosting it for yourself
 Informations about downloading and hosting the bot for yourself will follow...
