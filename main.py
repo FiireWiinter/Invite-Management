@@ -154,7 +154,7 @@ async def on_message(message):
     try:
         if message.mentions[0] == client.user:
             embed = discord.Embed(
-                title="My prefix is `{await get_prefix(client, message)}`! \n"
+                title=f"My prefix is `{await get_prefix(client, message)}`! \n"
                       f"Type `{await get_prefix(client, message)}help` for more commands!",
                 color=discord.Color.green()
             )
